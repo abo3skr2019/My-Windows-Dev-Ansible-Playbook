@@ -1,0 +1,150 @@
+---
+- name: Install Discord and WhatsApp
+  hosts: windows
+
+  tasks:
+    - name: Install Discord
+      win_chocolatey:
+        name: discord
+        state: present
+
+    - name: Install WhatsApp
+      win_chocolatey:
+        name: whatsapp
+        state: present
+
+- name: Install VLC and HandBrake
+  hosts: windows
+
+  tasks:
+    - name: Install VLC
+      win_chocolatey:
+        name: vlc
+        state: present
+
+    - name: Install HandBrake
+      win_chocolatey:
+        name: handbrake
+        state: present
+
+- name: Install Firefox and Brave
+  hosts: windows
+
+  tasks:
+    - name: Install Firefox
+      win_chocolatey:
+        name: Firefox
+        state: present
+
+    - name: Install Brave
+      win_chocolatey:
+        name: Brave
+        state: present
+
+- name: Install OBS Studio and Voicemeeter Potato
+  hosts: windows
+
+  tasks:
+    - name: Install OBS Studio
+      win_chocolatey:
+        name: obs-studio
+        state: present
+    - name: Install Voicemeeter Potato
+      win_chocolatey:
+        name: voicemeeter-potato
+        state: present
+
+- name: Install Everything Search and notepadplusplus
+  hosts: windows
+
+  tasks:
+    - name: Install Everything Search
+      win_chocolatey:
+        name: everything
+        state: present
+
+    - name: Install Notepad++
+      win_chocolatey:
+        name: notepadplusplus
+        state: present
+
+- name: Install FanControl and Flow Launcher
+  hosts: windows
+
+  tasks:
+    - name: Install FanControl
+      win_package:
+        name: FanControl
+        state: present
+        package_manager: winget
+
+    - name: Install Flow Launcher
+      win_chocolatey:
+        name: flowlauncher
+        state: present
+
+- name: Install PIA and Tailscale
+  hosts: windows
+
+  tasks:
+    - name: Install PIA
+      win_chocolatey:
+        name: privateinternetaccess
+        state: present
+    - name: Install Tailscale
+      win_chocolatey:
+        name: tailscale
+        state: present
+
+- name: Install Wiztree and 7-Zip
+  hosts: windows
+
+  tasks:
+    - name: Install Wiztree
+      win_chocolatey:
+        name: wiztree
+        state: present
+    - name: Install 7-Zip
+      win_chocolatey:
+        name: 7zip
+        state: present
+
+- name: Install Paint.net and audacity
+  hosts: windows
+
+  tasks:
+    - name: Install Paint.net
+      win_chocolatey:
+        name: paint.net
+        state: present
+    - name: Install Audacity
+      win_chocolatey:
+        name: audacity
+        state: present
+
+- name: Install Crystaldiskinfo and Speccy
+  hosts: windows
+
+  tasks:
+    - name: Install Crystaldiskinfo
+      win_chocolatey:
+        name: crystaldiskinfo
+        state: present
+    - name: Install Speccy
+      win_chocolatey:
+        name: speccy
+        state: present  
+
+- name: Install AutoHotkey and obsidian
+  hosts: windows
+
+  tasks:
+    - name: Install AutoHotkey
+      win_chocolatey:
+        name: autohotkey
+        state: present
+    - name: Install Obsidian
+      win_chocolatey:
+        name: obsidian
+        state: present
+

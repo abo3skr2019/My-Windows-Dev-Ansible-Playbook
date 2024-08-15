@@ -1,0 +1,123 @@
+---
+- name: Setup Windows Development Environment
+  hosts: windows
+  tasks:
+    - name: Install Chocolatey
+      win_chocolatey:
+        name: chocolatey
+        state: present
+
+    - name: Install Git
+      win_chocolatey:
+        name: git
+        state: present
+
+    - name: Install Visual Studio Code
+      win_chocolatey:
+        name: vscode
+        state: present
+
+    - name: Install Python
+      win_chocolatey:
+        name: python
+        state: present
+  
+    - name: Install JDK 8
+      win_chocolatey:
+        name: temurin8
+        state: present
+
+    - name: Install JDK 21
+      win_chocolatey:
+        name: temurin21
+        state: present
+  
+    - name: Install Docker Desktop
+      win_chocolatey:
+        name: docker-desktop
+        state: present
+
+    - name: Install Docker Compose
+      win_chocolatey:
+        name: docker-compose
+        state: present
+    
+    - name: Install Putty
+      win_chocolatey:
+        name: putty
+        state: present
+    
+    - name: Install WinSCP
+      win_chocolatey:
+        name: winscp
+        state: present
+
+    - name: Install pipenv
+      pip:
+        name:
+          - pipenv
+        state: present
+
+- name: Setup WSL 2
+  hosts: windows
+  tasks:
+    - name: Enable WSL feature
+      win_feature:
+        name: Microsoft-Windows-Subsystem-Linux
+        state: present
+
+    - name: Enable Virtual Machine Platform feature
+      win_feature:
+        name: VirtualMachinePlatform
+        state: present
+
+    - name: Set WSL 2 as default version
+      win_shell: wsl --set-default-version 2
+
+    - name: Install Ubuntu 20.04 LTS
+      win_shell: wsl --install -d Ubuntu-20.04
+
+- name: Install Programs in WSL 2
+  hosts: windows
+  tasks:
+    - name: Install Python in WSL 2
+      win_shell: |
+        wsl -d Ubuntu-20.04 -- sudo apt update
+        wsl -d Ubuntu-20.04 -- sudo apt install -y python3 python3-pip
+
+    - name: Install JDK 8 in WSL 2
+      win_shell: |
+        wsl -d Ubuntu-20.04 -- sudo apt update
+        wsl -d Ubuntu-20.04 -- sudo apt install -y openjdk-8-jdk
+
+    - name: Install JDK 21 in WSL 2
+      win_shell: |
+        wsl -d Ubuntu-20.04 -- sudo apt update
+        wsl -d Ubuntu-20.04 -- sudo apt install -y openjdk-21-jdk
+
+    - name: Install pipenv in WSL 2
+      win_shell: |
+        wsl -d Ubuntu-20.04 -- pip3 install pipenv
+
+- name: Install VS Code extensions
+  hosts: windows
+  tasks:
+    - name: Install VS Code extensions
+      community.general.npm:
+        name: "{{ item }}"
+        global: yes
+        executable: "C:\\Program Files\\Microsoft VS Code\\bin\\code.cmd"
+      loop:
+        - k--kato.intellij-idea-keybindings
+        - eamodio.gitlens
+        - ecmel.vscode-html-css
+        - esbenp.prettier-vscode
+        - github.copilot
+        - github.copilot-chat
+        - ms-azuretools.vscode-docker
+        - ms-vscode-remote.vscode-remote-extensionpack
+        - ms-python.black-formatter
+        - donjayamanne.python-extension-pack
+        - vscjava.vscode-java-pack
+        - budparr.language-hugo-vscode
+        - vscode-icons-team.vscode-icons
